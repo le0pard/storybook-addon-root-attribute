@@ -1,0 +1,58 @@
+{
+  "name": "storybook-addon-root-attribute",
+  "version": "0.1.0",
+  "description": "Storybook addon, which provide ability to change html or body attribute",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/le0pard/storybook-addon-root-attribute.git"
+  },
+  "keywords": [
+    "storybook",
+    "addon",
+    "root",
+    "attribute"
+  ],
+  "author": "Alexey Vasiliev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/le0pard/storybook-addon-root-attribute/issues"
+  },
+  "homepage": "https://github.com/le0pard/storybook-addon-root-attribute#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+    "@babel/plugin-syntax-class-properties": "^7.2.0",
+    "@babel/plugin-syntax-export-default-from": "^7.2.0",
+    "@babel/plugin-syntax-export-namespace-from": "^7.2.0",
+    "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
+    "@babel/plugin-transform-regenerator": "^7.4.3",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.4.3",
+    "@babel/runtime-corejs2": "^7.4.3",
+    "core-js": "2.6.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "rollup": "^1.9.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-node-resolve": "^4.2.1"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "dependencies": {
+    "@storybook/channels": "^5.0.6",
+    "@storybook/components": "^5.0.6",
+    "@storybook/core-events": "^5.0.6",
+    "global": "^4.3.2"
+  }
+}

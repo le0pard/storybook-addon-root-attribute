@@ -1,0 +1,10 @@
+*.swp
+.DS_Store
+/node_modules
+yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+/index.js
+/index.js.map
+/register.js
+/register.js.map

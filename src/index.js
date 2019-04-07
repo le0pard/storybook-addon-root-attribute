@@ -1,0 +1,1 @@
+export {withRootAttribute} from './withRootAttribute';
