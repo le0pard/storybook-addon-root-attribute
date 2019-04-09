@@ -1,8 +1,10 @@
+import document from 'global/document';
 import {EVENTS, PARAM_KEY} from './constants';
 import {addons, makeDecorator} from '@storybook/addons';
 
-const updateRootAttribute = () => {
-  // TODO
+const updateRootAttribute = (currentOptions) => {
+  console.log('currentOptions', currentOptions)
+  // document.documentElement.classList.add(attributeChange.value);
 }
 
 export const withRootAttribute = makeDecorator({
