@@ -1,6 +1,5 @@
 import React from 'react';
 import _merge from 'lodash/merge';
-import _pick from 'lodash/pick';
 import {EVENTS, PARAM_KEY} from './constants';
 import {STORY_RENDERED} from '@storybook/core-events';
 
@@ -69,7 +68,7 @@ export default class RootAttributePanel extends React.Component {
       if (mergedList.filter((st) => !!st.selected).length > 1) {
         mergedList = [
           {...mergedList[0], selected: true},
-          ...mergedList.slice(1).map((st) => _pick(st, ['name', 'value']))
+          ...mergedList.slice(1).map(({name, value}) => ({name, value}))
         ];
       }
 
