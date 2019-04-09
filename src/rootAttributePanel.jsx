@@ -87,7 +87,14 @@ export default class RootAttributePanel extends React.Component {
 
   emit() {
     const {api} = this.props;
-    api.emit(EVENTS.UPDATE, this.state.currentOptions);
+    const {currentOptions: {root, attribute, states}} = this.state;
+    const currentState = states.find((st) => !!st.selected);
+
+    api.emit(EVENTS.UPDATE, {
+      root,
+      attribute,
+      currentState
+    });
   }
 
   render() {
