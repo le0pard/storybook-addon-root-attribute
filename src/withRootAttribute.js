@@ -10,21 +10,13 @@ const updateRootAttribute = ({root, attribute, currentState}) => {
     return document.documentElement;
   })()
 
-  if (attribute === 'class') {
-    element.className = '';
+  element.removeAttribute(attribute);
 
-    if (currentState.value !== null) {
-      element.classList.add(currentState.value);
-    }
-  } else {
-    element.removeAttribute(attribute);
-
-    if (currentState.value !== null) {
-      element.setAttribute(
-        attribute,
-        currentState.value
-      );
-    }
+  if (currentState.value !== null) {
+    element.setAttribute(
+      attribute,
+      currentState.value
+    );
   }
 }
 
