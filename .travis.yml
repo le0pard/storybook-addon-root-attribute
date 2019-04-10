@@ -27,3 +27,4 @@ deploy:
   on:
     tags: true
     repo: le0pard/storybook-addon-root-attribute
+  skip_cleanup: true
