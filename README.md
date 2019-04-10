@@ -77,7 +77,7 @@ Configuration params for `rootAttribute` parameter:
 | defaultState | {}        | should contain `name` and `value`                                         | Default state for attribute. Value `nil` will remove attribute from root                                                |
 | states       | []        | array with objects, which contain unique `name` and `value` for attribute | All needed states for attribute values. Each object should contain unique `name` (for button) and `value` for attribute |
 
-Example of configurations:
+Configuration example:
 
 ```js
 addDecorator(withRootAttribute)
