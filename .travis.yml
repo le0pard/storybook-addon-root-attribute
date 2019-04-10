@@ -1,17 +1,20 @@
 language: node_js
-
 cache:
   yarn: true
-
 node_js:
-  - "node"
-  - "lts/*"
-
+- node
+- lts/*
 sudo: false
 dist: xenial
-
 matrix:
   fast_finish: true
-
 notifications:
   email: false
+deploy:
+  provider: npm
+  email: leopard.not.a@gmail.com
+  api_key:
+    secure: kty/mxQ9G2g46PjIi45BBuulmM+r0ZhYP7ahKzqCaakCkLkOUdfwlHAAIm/6SOGIYVajxw/wg2AYQrA7JLWdSvSTu7q8rmM4ubRAoS9KZsADjWZUvp45rjBeo5D/r/H6lQWM2rm3Z+x73Au/uCzLD4ctnp2RtrKZ2VxGHdSCifq/cIAJxET9bpavtIp7hSqfAfiHTBytUh0rAclgwLdqHkhnwKQf9NRwVmV/QrcKoLRCmWtoXLXpYDhHUXrKWWH7VD9CJDe3aqw/6B8dobw4oQMqw3pJ1VPDHg4YA93NHk5n9SGKEhwncskNqUfasFEqO1QfIQZYgpBg92tlTWMvDQ76pDR9qfZtKoMTHf+87xX11PVXM+u5RAlxDv60H9zbeM69BtkUq3yfz6MAJqDBxKWa4PSJ4ArKtaE1T5oC4TF052HSoIYcFPwnepezfnEK2sHWPFf34eU3cWL1kJriM6Xf50qEBHCGGO9j1dU2KgNrGKtLo/AEXRd5FQvUNWOC/Ys7IOZNahOS1hnoyodQeM4Y96q9q/uyuDugk0eGa7ejoQkv9Fz7Jhf4uVFC06iWMuR0CNsB439uxrIiYV68Xl+t/5dc+AIk6w038DMD1Ys1lqeb1sdKjP+GYv684TwTMJpGaCPkR4dS5rSaxDR5UXwTDn0olO0WFn80d0XFKGA=
+  on:
+    tags: true
+    repo: le0pard/storybook-addon-root-attribute

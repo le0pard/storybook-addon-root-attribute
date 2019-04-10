@@ -1,6 +1,7 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
+import {eslint} from 'rollup-plugin-eslint';
 
 const rollupOptions = {
   plugins: [
@@ -10,6 +11,9 @@ const rollupOptions = {
     commonjs({
       include: 'node_modules/**',
       extensions: ['.js', '.jsx']
+    }),
+    eslint({
+      throwOnError: true
     }),
     babel({
       exclude: 'node_modules/**' // only transpile our source code
