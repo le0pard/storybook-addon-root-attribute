@@ -1,7 +1,7 @@
 {
   "name": "storybook-addon-root-attribute",
   "version": "0.1.0",
-  "description": "Storybook addon, which provide ability to change html or body attribute",
+  "description": "Storybook Addon Root Attribute to switch html or body attribute at runtime for your story",
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",

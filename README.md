@@ -1,6 +1,6 @@
 # Storybook Addon Root Attribute [![Build Status](https://travis-ci.com/le0pard/storybook-addon-root-attribute.svg?branch=master)](https://travis-ci.com/le0pard/storybook-addon-root-attribute)
 
-Storybook Addon Root Attribute to switch between html or body attribute at runtime for your story [Storybook](https://storybook.js.org)
+Storybook Addon Root Attribute to switch html or body attribute at runtime for your story [Storybook](https://storybook.js.org)
 
 ## Installation
 
