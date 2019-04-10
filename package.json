@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup -c",
     "eslint": "eslint --ext .jsx,.js src/",
-    "test": "npm eslint"
+    "test": "npm run eslint"
   },
   "repository": {
     "type": "git",
