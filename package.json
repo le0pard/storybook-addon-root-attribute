@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
-    "eslint": "eslint --ext .jsx,.js src/"
+    "eslint": "eslint --ext .jsx,.js src/",
+    "test": "npm eslint"
   },
   "repository": {
     "type": "git",
