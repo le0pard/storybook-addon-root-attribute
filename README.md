@@ -43,9 +43,11 @@ addParameters({
     ]
   },
 });
+```
 
 You can use the `rootAttribute` parameter to override resources on each story individually:
 
+```js
 // per story
 storiesOf('Addons|RootAttribute', module)
   .add('Camera Icon', () => <i className="fa fa-camera-retro"> Camera Icon</i>, {
