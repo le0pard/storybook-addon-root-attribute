@@ -20,7 +20,7 @@ import 'storybook-addon-root-attribute/register';
 
 ## Usage
 
-You need add the all the css resources at compile time using the `withRootAttribute` decorator. They can be added globally or per story. You can then choose which ones root attribute activate on addon ui:
+You need add the all the attribute values at compile time using the `withRootAttribute` decorator. They can be added globally or per story. You can then choose which ones root attribute activate on addon ui:
 
 ```js
 // Import from @storybook/X where X is your framework
