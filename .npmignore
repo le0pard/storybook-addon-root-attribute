@@ -1,0 +1,10 @@
+/src
+/node_modules
+.cache
+.eslintrc
+.gitignore
+.storybook
+.travis.yml
+babel.config.js
+rollup.config.js
+yarn.lock
