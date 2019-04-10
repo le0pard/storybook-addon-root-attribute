@@ -18,7 +18,8 @@ const rollupOptions = {
   external: [
     'react',
     '@storybook/addons',
-    '@storybook/core-events'
+    '@storybook/core-events',
+    '@storybook/theming'
   ]
 };
 

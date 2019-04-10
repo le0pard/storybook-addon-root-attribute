@@ -1,7 +1,39 @@
 import React from 'react';
 import _merge from 'lodash/merge';
 import {EVENTS, PARAM_KEY} from './constants';
+import {styled} from '@storybook/theming';
 import {STORY_RENDERED} from '@storybook/core-events';
+import {darken, rgba} from 'polished';
+
+const Button = styled.button((props) => ({
+  fontSize: props.theme.typography.size.s2 - 1,
+  fontWeight: props.theme.typography.weight.bold,
+  lineHeight: 1,
+  borderRadius: '3em',
+  cursor: 'pointer',
+  display: 'inline-block',
+  overflow: 'hidden',
+  padding: '13px 20px',
+  margin: '5px 10px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  verticalAlign: 'top',
+  whiteSpace: 'nowrap',
+  userSelect: 'none',
+  background: 'transparent',
+  transition: 'all 150ms ease-out',
+  transform: 'translate3d(0, 0, 0)',
+  opacity: 1,
+
+  ...(props.selected && {
+    background: props.theme.color.secondary,
+    color: props.theme.color.lightest,
+    '&:hover': {
+      background: darken(0.05, props.theme.color.secondary)
+    }
+  })
+}));
 
 const DEFAULT_VALUES = {
   root: 'html',
@@ -84,6 +116,29 @@ export default class RootAttributePanel extends React.Component {
     }
   }
 
+  onSelected(selectedName) {
+    const {currentOptions: {states}} = this.state;
+    const newStates = states.map(({name, value}) => {
+      if (selectedName === name) {
+        return {
+          name,
+          value,
+          selected: true
+        };
+      }
+      return {name, value};
+    });
+    this.setState((prevState) => ({
+      ...prevState,
+      currentOptions: {
+        ...prevState.currentOptions,
+        states: newStates
+      }
+    }), () => {
+      this.emit();
+    });
+  }
+
   emit() {
     const {api} = this.props;
     const {currentOptions: {root, attribute, states}} = this.state;
@@ -97,8 +152,25 @@ export default class RootAttributePanel extends React.Component {
   }
 
   render() {
+    const {currentOptions} = this.state;
+    const {active} = this.props;
+
+    if (!active) {
+      return null;
+    }
+
     return (
-      <h2>Hello</h2>
-    )
+      <div>
+        {currentOptions && currentOptions.states &&
+          currentOptions.states.map(({name, selected}) => (
+            <Button
+              key={name}
+              onClick={() => this.onSelected(name)}
+              selected={!!selected}>
+              {name}
+            </Button>
+          ))}
+      </div>
+    );
   }
 }
