@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rollup -c",
     "eslint": "eslint --ext .jsx,.js src/",
-    "test": "npm run eslint"
+    "jest": "jest",
+    "test": "npm run eslint && npm run jest"
   },
   "repository": {
     "type": "git",
@@ -41,14 +42,19 @@
     "@babel/runtime": "^7.4.3",
     "@babel/runtime-corejs2": "^7.4.3",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.7.1",
     "core-js": "2.6.5",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "eslint": "^5.16.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-react": "^7.12.4",
     "global": "^4.3.2",
+    "jest": "^24.7.1",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-test-renderer": "^16.8.6",
     "rollup": "^1.9.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.3.4",

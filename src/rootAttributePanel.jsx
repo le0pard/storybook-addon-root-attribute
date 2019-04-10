@@ -1,5 +1,6 @@
 import React from 'react';
 import _merge from 'lodash/merge';
+import _uniq from 'lodash/uniq';
 import {EVENTS, PARAM_KEY} from './constants';
 import {styled} from '@storybook/theming';
 import {STORY_RENDERED} from '@storybook/core-events';
@@ -49,7 +50,8 @@ export default class RootAttributePanel extends React.Component {
     this.emit = this.emit.bind(this);
     this.state = {
       currentStoryId: null,
-      currentOptions: DEFAULT_VALUES
+      currentOptions: DEFAULT_VALUES,
+      collectedStates: []
     };
   }
 
@@ -64,12 +66,12 @@ export default class RootAttributePanel extends React.Component {
   }
 
   onStoryChange(id) {
-    const {currentOptions, currentStoryId} = this.state;
+    const {currentStoryId, collectedStates} = this.state;
     const {api} = this.props;
     const params = api.getParameters(id, PARAM_KEY);
 
     if (params && id !== currentStoryId) {
-      const existingNames = currentOptions.states.reduce((arr, res) => {
+      const existingNames = collectedStates.reduce((arr, res) => {
         arr[res.name] = res;
         return arr;
       }, {});
@@ -105,10 +107,8 @@ export default class RootAttributePanel extends React.Component {
       }
 
       this.setState(() => ({
-        currentOptions: {
-          ...options,
-          states: mergedList
-        },
+        currentOptions: options,
+        collectedStates: mergedList,
         currentStoryId: id
       }), () => {
         this.emit();
@@ -117,8 +117,8 @@ export default class RootAttributePanel extends React.Component {
   }
 
   onSelected(selectedName) {
-    const {currentOptions: {states}} = this.state;
-    const newStates = states.map(({name, value}) => {
+    const {collectedStates} = this.state;
+    const newStates = collectedStates.map(({name, value}) => {
       if (selectedName === name) {
         return {
           name,
@@ -130,10 +130,7 @@ export default class RootAttributePanel extends React.Component {
     });
     this.setState((prevState) => ({
       ...prevState,
-      currentOptions: {
-        ...prevState.currentOptions,
-        states: newStates
-      }
+      collectedStates: newStates
     }), () => {
       this.emit();
     });
@@ -141,8 +138,8 @@ export default class RootAttributePanel extends React.Component {
 
   emit() {
     const {api} = this.props;
-    const {currentOptions: {root, attribute, states}} = this.state;
-    const currentState = states.find((st) => !!st.selected);
+    const {currentOptions: {root, attribute}, collectedStates} = this.state;
+    const currentState = collectedStates.find((st) => !!st.selected);
 
     api.emit(EVENTS.UPDATE, {
       root,
@@ -151,25 +148,49 @@ export default class RootAttributePanel extends React.Component {
     });
   }
 
+  invalidOptions(collectedStates) {
+    if (collectedStates && collectedStates.length > 0) {
+      const haveValues = collectedStates.every((st) => (
+        st.hasOwnProperty('name') && st.hasOwnProperty('value')
+      ));
+      if (!haveValues) {
+        return [true, 'All states should have name and value keys'];
+      }
+
+      const names = collectedStates.map((st) => st.name);
+      if (names.length !== _uniq(names).length) {
+        return [true, 'Found non unique name values'];
+      }
+    }
+    return [false, null];
+  }
+
   render() {
-    const {currentOptions} = this.state;
     const {active} = this.props;
 
     if (!active) {
       return null;
     }
 
+    const {collectedStates} = this.state;
+
+    const [isInvalid, errorMessage] = this.invalidOptions(collectedStates);
+    if (isInvalid) {
+      return (
+        <p>ERROR: {errorMessage}</p>
+      );
+    }
+
     return (
       <div>
-        {currentOptions && currentOptions.states &&
-          currentOptions.states.map(({name, selected}) => (
-            <Button
-              key={name}
-              onClick={() => this.onSelected(name)}
-              selected={!!selected}>
-              {name}
-            </Button>
-          ))}
+        {collectedStates && collectedStates.map(({name, selected}) => (
+          <Button
+            key={name}
+            onClick={() => this.onSelected(name)}
+            selected={!!selected}>
+            {name}
+          </Button>
+        ))}
       </div>
     );
   }
