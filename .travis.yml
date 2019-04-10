@@ -1,15 +1,24 @@
 language: node_js
+
 cache:
   yarn: true
+
 node_js:
 - node
 - lts/*
+
 sudo: false
 dist: xenial
+
 matrix:
   fast_finish: true
+
 notifications:
   email: false
+
+before_deploy:
+  - yarn build
+
 deploy:
   provider: npm
   email: leopard.not.a@gmail.com
