@@ -1,29 +1,22 @@
 language: node_js
-
 cache:
   yarn: true
-
 node_js:
 - node
 - lts/*
-
 sudo: false
 dist: xenial
-
 matrix:
   fast_finish: true
-
 notifications:
   email: false
-
 before_deploy:
 - yarn build
-
 deploy:
   provider: npm
   email: leopard.not.a@gmail.com
   api_key:
-    secure: aYduGwPC2fqITSzo3be5dAlP5p6H6PkYXOGCRXKUMn2F1jzjxkD5fwLtLJa7vLbAioV6/hWz/8GCLt5oVBrgtvvG4JKuR3PD4mBHfNyC/XDCTeYpql1M5lvbGQU4InGe8kIxxjpRSWrqSMoAWO/iZc7BA8TQ47ATGNLEY+b/pKTQbgQ7L32LdL4S0LV/ik+cRpfczlgSMv/yUErbA9onAgLeJQEz6dXZuBO7Yy9B208BBcQTVYvHNuaTu0uET6bfOaJzs0nICfpPKmfvJLwg9+XTiSIMCt6Gk/KnXxGfJ4w+2m3IYfsVbkMzenocNid/Ddw6zhSECrWZ/Bwh8yeR7Z79y+NVj9EGSKWoxNSaIhCBDr6sARcDGI3eP+nTieBR0qbu2/XCsWchz7vE2vjmQKIWRx8z0yh6O+Bkg+lQpO9c4yPuNCBP2jEyLDRiYop9xWTPaXuRXSLFTi7PpplKnrfA7TL6sG5//AWVPP3xHGlh4VfIPkg5PNV8/Lmfn8kv1HK6VSl+Q9vFcxrE9DFRPcaUsSmekrCqRUOFqIdEcOl5E0U848fzBZIh1soPR+mrKRWCAQSMKMFfq3DDJHuwiazvnuwsxQYK2Dc2guew6VfhT4jiU5vc4fh6e1Zpux8+eXlEvsdZPTJ88D8vIH/aEe6oH01+Iue0dmV2eGjEUhQ=
+    secure: MAorG+ARXV6ewCsWs5t3845F0xM294NHLdD6zhXne2ZLxQH1szwPcIVJaiXSqVlS9I8y+b/KcEh2V7sMnL0mzxxnNQ79uJkR0Atp2mBJk7iWKqsHRjyPZhLL2BcspLvx3IS/VOLUYcqKhS2xm2dZrtA2PYjGsi/na6V949zCzXqZq+bog7OfqkJjy0L4oc3Xan+zEDWAzm0MSpmuHCNK4JGjNdPWTB/2UwLW55qwQcCfZFnr85W+qcX9Gkhyu83gJFLxPj4ASrMfUVkhj1B1XOd1vWVSDmFwEqCASY677UfeYx+6t85wC5oLAprkcGb/SrL1hWerY52Wu4ghaQ8y7c4iZUFW0zPD2PA8z1aMJ18PqRFDj16mfMcY8tHj/ToyvFJ+UKAIwr3G4BQcnOb0opFRKSTadGqxOasfJxTKQzM7+ucovvRLWUBLS1mbexCx7tCgcsUpnyq/nqahDf0nBSgNh6c/D5eLvSouab64/VowWYMoEayOkqwN6tvAS0XPslzZScYKHM0+pccCpffLtOyWXFrRL6SSn8KehWYns5cbwkGRHiOFigRld4jEjAv0ev7ah57PlRh9qqbQhTGS/pvEdWaohkpyK5crw5sQOwnUXg78sMhtR+BQvANa5XTOd5EB8GyOXLo2D3WDGY7mxb5HhC9bq+3rr/luh9TFUMc=
   on:
     tags: true
     repo: le0pard/storybook-addon-root-attribute
