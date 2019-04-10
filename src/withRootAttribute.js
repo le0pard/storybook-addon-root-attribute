@@ -8,7 +8,7 @@ const updateRootAttribute = ({root, attribute, currentState}) => {
       return document.body;
     }
     return document.documentElement;
-  })()
+  })();
 
   element.removeAttribute(attribute);
 
@@ -18,7 +18,7 @@ const updateRootAttribute = ({root, attribute, currentState}) => {
       currentState.value
     );
   }
-}
+};
 
 export const withRootAttribute = makeDecorator({
   name: 'withRootAttribute',
@@ -30,5 +30,4 @@ export const withRootAttribute = makeDecorator({
 
     return getStory(context);
   }
-})
-
+});

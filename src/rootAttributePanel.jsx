@@ -3,7 +3,7 @@ import _merge from 'lodash/merge';
 import {EVENTS, PARAM_KEY} from './constants';
 import {styled} from '@storybook/theming';
 import {STORY_RENDERED} from '@storybook/core-events';
-import {darken, rgba} from 'polished';
+import {darken} from 'polished';
 
 const Button = styled.button((props) => ({
   fontSize: props.theme.typography.size.s2 - 1,
@@ -63,7 +63,7 @@ export default class RootAttributePanel extends React.Component {
     api.off(STORY_RENDERED, this.onStoryChange);
   }
 
-  onStoryChange (id) {
+  onStoryChange(id) {
     const {currentOptions, currentStoryId} = this.state;
     const {api} = this.props;
     const params = api.getParameters(id, PARAM_KEY);
@@ -84,7 +84,7 @@ export default class RootAttributePanel extends React.Component {
           return {
             ...res,
             selected: existingItem.selected
-          }
+          };
         }
 
         return res;

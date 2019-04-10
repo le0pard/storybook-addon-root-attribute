@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
-    "test": ""
+    "eslint": "eslint --ext .jsx,.js src/"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,11 @@
     "@babel/runtime": "^7.4.3",
     "@babel/runtime-corejs2": "^7.4.3",
     "@storybook/theming": "^5.0.6",
+    "babel-eslint": "^10.0.1",
     "core-js": "2.6.5",
+    "eslint": "^5.16.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-react": "^7.12.4",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
