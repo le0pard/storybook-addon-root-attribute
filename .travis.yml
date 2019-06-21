@@ -1,17 +1,29 @@
 language: node_js
+
 cache:
   yarn: true
+
 node_js:
 - node
 - lts/*
+
 sudo: false
 dist: xenial
+
 matrix:
   fast_finish: true
+  include:
+    - node_js: '12.4'
+      env: LATEST=true
+    - node_js: lts/*
+
+
 notifications:
   email: false
+
 before_deploy:
 - yarn build
+
 deploy:
   provider: npm
   email: leopard.not.a@gmail.com
@@ -20,4 +32,6 @@ deploy:
   on:
     tags: true
     repo: le0pard/storybook-addon-root-attribute
+    condition: $LATEST = true
+
   skip_cleanup: true
