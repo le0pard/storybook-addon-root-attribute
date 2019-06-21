@@ -56,7 +56,7 @@ test('RootAttributePanel render list', () => {
   const panel = shallow(<RootAttributePanel api={api} active={true} />);
   callback();
 
-  expect(panel.text()).toEqual('<Styled(button) /><Styled(button) />');
+  expect(panel.text()).toEqual('<Styled(Button) /><Styled(Button) />');
   expect(panel.state().currentOptions).toEqual({
     root: 'html',
     attribute: 'class',
@@ -82,4 +82,36 @@ test('RootAttributePanel render list', () => {
       value: 'dark'
     }
   ]);
+});
+
+test('RootAttributePanel render toolbar', () => {
+  let callback = null;
+  const api = {
+    on: (event, cb) => {
+      callback = cb;
+    },
+    off: () => {
+      callback = null;
+    },
+    getParameters: () => {
+      return {
+        defaultState: {
+          name: 'Default',
+          value: null
+        },
+        states: [
+          {
+            name: 'Dark',
+            value: 'dark'
+          }
+        ]
+      };
+    },
+    emit: () => {}
+  };
+
+  const panel = shallow(<RootAttributePanel isToolbar={true} api={api} />);
+  callback();
+
+  expect(panel.text()).toEqual('<lifecycle(WithTooltipPure) />');
 });
