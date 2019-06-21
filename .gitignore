@@ -8,5 +8,5 @@ yarn-debug.log*
 /index.js.map
 /register.js
 /register.js.map
-/registerToolBar.js
-/registerToolBar.js.map
+/registerToolbar.js
+/registerToolbar.js.map
