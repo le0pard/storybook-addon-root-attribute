@@ -80,7 +80,7 @@ Configuration params for `rootAttribute` parameter:
 
 | **Name**     | _Default_ | _Variants_                                                                                          | **Description**                                                                                                         |
 | ------------ | --------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| root         | 'html'    | 'html', 'body', or first element returned by 'Document.querySelector(), or if none found -- 'html'' | Root node, which attribute will changed by addon                                                                        |
+| root         | 'html'    | 'html', 'body', or first element returned by 'document.querySelector(), or if none found -- 'html'' | Root node, which attribute will changed by addon                                                                        |
 | attribute    | 'class'   | any valid attribute name                                                                            | Attribute name                                                                                                          |
 | defaultState | {}        | should contain `name` and `value`                                                                   | Default state for attribute. Value `nil` will remove attribute from root                                                |
 | states       | []        | array with objects, which contain unique `name` and `value` for attribute                           | All needed states for attribute values. Each object should contain unique `name` (for button) and `value` for attribute |
@@ -101,6 +101,10 @@ addParameters({
       {
         name: "Dark",
         value: "dark"
+      },
+      {
+        name: "A11Y",
+        value: "accessibility"
       }
     ]
   }
