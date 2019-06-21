@@ -106,7 +106,7 @@
     // Node.js specific
     // React
     "jsx-quotes": [2, "prefer-double"],
-    "react/display-name": [2, {"ignoreTranspilerName": false}],
+    "react/display-name": 0,
     "react/jsx-boolean-value": [2, "always"],
     "react/jsx-curly-spacing": 2,
     "react/jsx-max-props-per-line": 0,
@@ -119,7 +119,7 @@
     "react/no-danger": 0,
     "react/no-did-mount-set-state": 2,
     "react/no-did-update-set-state": 2,
-    "react/no-multi-comp": 2,
+    "react/no-multi-comp": 0,
     "react/no-unknown-property": 2,
     "react/no-unused-prop-types": 2,
     "react/prop-types": 0,

@@ -22,11 +22,12 @@ const rollupOptions = {
     uglify({
       sourcemap: true,
       numWorkers: 2
-    })
+    }),
   ],
   external: [
     'react',
     '@storybook/addons',
+    '@storybook/components',
     '@storybook/core-events',
     '@storybook/theming'
   ]
@@ -47,6 +48,13 @@ export default [{
     file: 'register.js',
     format: 'cjs',
     sourcemap: true
-  },
-
+  }
+}, {
+  ...rollupOptions,
+  input: 'src/registerToolBar.js',
+  output: {
+    file: 'registerToolBar.js',
+    format: 'cjs',
+    sourcemap: true
+  }
 }]

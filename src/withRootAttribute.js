@@ -1,5 +1,5 @@
 import document from 'global/document';
-import {EVENTS, PARAM_KEY} from './constants';
+import {EVENTS, PARAM_KEY} from './register/constants';
 import {addons, makeDecorator} from '@storybook/addons';
 
 const updateRootAttribute = ({root, attribute, currentState}) => {

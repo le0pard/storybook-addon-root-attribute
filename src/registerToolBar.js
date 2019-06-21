@@ -1,3 +1,3 @@
 import {register} from './register/function';
 
-register();
+register(true);

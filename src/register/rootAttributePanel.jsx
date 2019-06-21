@@ -5,27 +5,17 @@ import {EVENTS, PARAM_KEY} from './constants';
 import {styled} from '@storybook/theming';
 import {STORY_RENDERED} from '@storybook/core-events';
 import {darken} from 'polished';
+import {
+  Button,
+  Icons,
+  IconButton,
+  WithTooltip,
+  TooltipLinkList
+} from '@storybook/components';
 
-const Button = styled.button((props) => ({
-  fontSize: props.theme.typography.size.s2 - 1,
-  fontWeight: props.theme.typography.weight.bold,
-  lineHeight: 1,
-  borderRadius: '3em',
-  cursor: 'pointer',
-  display: 'inline-block',
-  overflow: 'hidden',
+const SwitchButton = styled(Button)((props) => ({
   padding: '13px 20px',
   margin: '5px 10px',
-  position: 'relative',
-  textAlign: 'center',
-  textDecoration: 'none',
-  verticalAlign: 'top',
-  whiteSpace: 'nowrap',
-  userSelect: 'none',
-  background: 'transparent',
-  transition: 'all 150ms ease-out',
-  transform: 'translate3d(0, 0, 0)',
-  opacity: 1,
 
   ...(props.selected && {
     background: props.theme.color.secondary,
@@ -44,11 +34,16 @@ const DEFAULT_VALUES = {
 };
 
 export default class RootAttributePanel extends React.Component {
+  static defaultProps = {
+    isToolBar: false
+  }
+
   constructor(props) {
     super(props);
     this.onStoryChange = this.onStoryChange.bind(this);
     this.emit = this.emit.bind(this);
     this.state = {
+      toolExpanded: false,
       currentStoryId: null,
       currentOptions: DEFAULT_VALUES,
       collectedStates: []
@@ -92,6 +87,7 @@ export default class RootAttributePanel extends React.Component {
         return res;
       });
 
+      // reset to default, if no selected
       if (!mergedList.some((st) => !!st.selected)) {
         mergedList = [
           {...mergedList[0], selected: true},
@@ -99,6 +95,7 @@ export default class RootAttributePanel extends React.Component {
         ];
       }
 
+      // reset to default, if more, than one selected
       if (mergedList.filter((st) => !!st.selected).length > 1) {
         mergedList = [
           {...mergedList[0], selected: true},
@@ -136,6 +133,31 @@ export default class RootAttributePanel extends React.Component {
     });
   }
 
+  resetToDefaultState() {
+    const {collectedStates} = this.state;
+    const newStates = collectedStates.map(({name, value}, index) => {
+      if (index === 0) {
+        return {
+          name,
+          value,
+          selected: true
+        };
+      }
+      return {name, value};
+    });
+    this.setState((prevState) => ({
+      ...prevState,
+      collectedStates: newStates
+    }), () => {
+      this.emit();
+    });
+  }
+
+  isDefaultSelected() {
+    const {collectedStates} = this.state;
+    return collectedStates && collectedStates[0] && !!collectedStates[0].selected;
+  }
+
   emit() {
     const {api} = this.props;
     const {currentOptions: {root, attribute}, collectedStates} = this.state;
@@ -165,7 +187,48 @@ export default class RootAttributePanel extends React.Component {
     return [false, null];
   }
 
-  render() {
+  onToolVisibilityChange(value) {
+    const {toolExpanded} = this.state;
+    if (toolExpanded !== value) {
+      this.setState((prevState) => ({...prevState, toolExpanded: value}));
+    }
+  }
+
+  renderToolBar() {
+    const {toolExpanded, collectedStates} = this.state;
+
+    const [isInvalid] = this.invalidOptions(collectedStates);
+
+    if (isInvalid) {
+      return null;
+    }
+
+    const links = collectedStates.map(({name, selected}) => ({
+      id: name,
+      title: name,
+      onClick: () => (this.onSelected(name)),
+      right: null,
+      active: !!selected
+    }));
+
+    return (
+      <WithTooltip
+        placement="top"
+        trigger="click"
+        tooltipShown={toolExpanded}
+        onVisibilityChange={this.onToolVisibilityChange.bind(this)}
+        tooltip={<TooltipLinkList links={links} />}
+        closeOnClick={true}
+        onDoubleClick={() => this.resetToDefaultState()}
+      >
+        <IconButton key="attribute" active={!this.isDefaultSelected()} title="Root Attribute">
+          <Icons icon="structure" />
+        </IconButton>
+      </WithTooltip>
+    );
+  }
+
+  renderPanel() {
     const {active} = this.props;
 
     if (!active) {
@@ -184,14 +247,24 @@ export default class RootAttributePanel extends React.Component {
     return (
       <div>
         {collectedStates && collectedStates.map(({name, selected}) => (
-          <Button
+          <SwitchButton
             key={name}
             onClick={() => this.onSelected(name)}
             selected={!!selected}>
             {name}
-          </Button>
+          </SwitchButton>
         ))}
       </div>
     );
+  }
+
+  render() {
+    const {isToolBar} = this.props;
+
+    if (isToolBar) {
+      return this.renderToolBar();
+    } else {
+      return this.renderPanel();
+    }
   }
 }

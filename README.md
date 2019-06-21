@@ -18,6 +18,12 @@ Add following content to it:
 import 'storybook-addon-root-attribute/register';
 ```
 
+If you want use toolbar instead panel, you need add this:
+
+```js
+import 'storybook-addon-root-attribute/registerToolBar';
+```
+
 ## Usage
 
 You need add the all the attribute values at compile time using the `withRootAttribute` decorator. They can be added globally or per story. You can then choose which ones root attribute activate on addon ui:
