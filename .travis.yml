@@ -9,7 +9,7 @@ dist: xenial
 matrix:
   fast_finish: true
   include:
-    - node_js: '12.4'
+    - node_js: node
       env: LATEST=true
     - node_js: lts/*
 
