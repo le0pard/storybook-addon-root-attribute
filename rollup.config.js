@@ -22,7 +22,7 @@ const rollupOptions = {
     uglify({
       sourcemap: true,
       numWorkers: 2
-    }),
+    })
   ],
   external: [
     'react',
