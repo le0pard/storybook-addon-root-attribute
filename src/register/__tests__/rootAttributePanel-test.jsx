@@ -110,7 +110,7 @@ test('RootAttributePanel render toolbar', () => {
     emit: () => {}
   };
 
-  const panel = shallow(<RootAttributePanel isToolBar={true} api={api} />);
+  const panel = shallow(<RootAttributePanel isToolbar={true} api={api} />);
   callback();
 
   expect(panel.text()).toEqual('<lifecycle(WithTooltipPure) />');

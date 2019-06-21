@@ -3,15 +3,15 @@ import RootAttributePanel from './rootAttributePanel';
 import {addons, types} from '@storybook/addons';
 import {ADDON_ID, PANEL_ID} from './constants';
 
-export const register = (initToolBar = false) => {
+export const register = (initToolbar = false) => {
   addons.register(ADDON_ID, (api) => {
-    if (initToolBar) {
+    if (initToolbar) {
       addons.add(PANEL_ID, {
         type: types.TOOL,
         title: '',
         match: ({viewMode}) => viewMode === 'story',
         render: () => (
-          <RootAttributePanel isToolBar={true} key={PANEL_ID} api={api} />
+          <RootAttributePanel isToolbar={true} key={PANEL_ID} api={api} />
         )
       });
     } else {

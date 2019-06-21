@@ -51,9 +51,9 @@ export default [{
   }
 }, {
   ...rollupOptions,
-  input: 'src/registerToolBar.js',
+  input: 'src/registerToolbar.js',
   output: {
-    file: 'registerToolBar.js',
+    file: 'registerToolbar.js',
     format: 'cjs',
     sourcemap: true
   }
