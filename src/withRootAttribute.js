@@ -1,13 +1,13 @@
-import document from "global/document";
-import { EVENTS, PARAM_KEY } from "./constants";
-import { addons, makeDecorator } from "@storybook/addons";
+import document from 'global/document';
+import {EVENTS, PARAM_KEY} from './constants';
+import {addons, makeDecorator} from '@storybook/addons';
 
-const updateRootAttribute = ({ root = "html", attribute, currentState }) => {
+const updateRootAttribute = ({root = 'html', attribute, currentState}) => {
   const element = (() => {
-    if (root === "body") {
+    if (root === 'body') {
       return document.body;
     }
-    if (root === "html") {
+    if (root === 'html') {
       return document.documentElement;
     }
     return document.querySelector(root) || document.documentElement;
@@ -21,7 +21,7 @@ const updateRootAttribute = ({ root = "html", attribute, currentState }) => {
 };
 
 export const withRootAttribute = makeDecorator({
-  name: "withRootAttribute",
+  name: 'withRootAttribute',
   parameterName: PARAM_KEY,
   skipIfNoParametersOrOptions: true,
   allowDeprecatedUsage: false,
