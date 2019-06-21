@@ -18,7 +18,7 @@ Add following content to it:
 import 'storybook-addon-root-attribute/register';
 ```
 
-If you want use toolbar instead panel, you need add this:
+If you want use toolbar instead panel, you need add this instead previous import:
 
 ```js
 import 'storybook-addon-root-attribute/registerToolBar';
