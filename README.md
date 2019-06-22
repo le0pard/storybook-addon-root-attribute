@@ -2,6 +2,8 @@
 
 Storybook Addon Root Attribute to switch html or body attribute at runtime for your story [Storybook](https://storybook.js.org)
 
+## [Demo](https://storybook-addon-root-attribute.leopard.in.ua)
+
 ## Installation
 
 ```sh
