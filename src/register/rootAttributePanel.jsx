@@ -4,7 +4,6 @@ import _uniq from 'lodash/uniq';
 import {EVENTS, PARAM_KEY} from './constants';
 import {styled} from '@storybook/theming';
 import {STORY_RENDERED} from '@storybook/core-events';
-import {darken} from 'polished';
 import {
   Button,
   Icons,
@@ -13,17 +12,9 @@ import {
   TooltipLinkList
 } from '@storybook/components';
 
-const SwitchButton = styled(Button)((props) => ({
+const SwitchButton = styled(Button)(() => ({
   padding: '13px 20px',
-  margin: '5px 10px',
-
-  ...(props.selected && {
-    background: props.theme.color.secondary,
-    color: props.theme.color.lightest,
-    '&:hover': {
-      background: darken(0.05, props.theme.color.secondary)
-    }
-  })
+  margin: '5px 10px'
 }));
 
 const DEFAULT_VALUES = {
@@ -250,7 +241,8 @@ export default class RootAttributePanel extends React.Component {
           <SwitchButton
             key={name}
             onClick={() => this.onSelected(name)}
-            selected={!!selected}>
+            outline={!selected}
+            secondary={!!selected}>
             {name}
           </SwitchButton>
         ))}
