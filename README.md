@@ -20,7 +20,7 @@ Add following content to it:
 import "storybook-addon-root-attribute/register";
 ```
 
-If you want use a toolbar instead of a panel, you need to add this instead previous import:
+If you want to use a toolbar instead of a panel, you need to add this instead previous import:
 
 ```js
 import 'storybook-addon-root-attribute/registerToolbar';
