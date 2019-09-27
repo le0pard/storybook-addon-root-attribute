@@ -26,6 +26,7 @@ const rollupOptions = {
   external: [
     'react',
     '@storybook/addons',
+    '@storybook/components',
     '@storybook/core-events',
     '@storybook/theming'
   ]
@@ -46,6 +47,13 @@ export default [{
     file: 'register.js',
     format: 'cjs',
     sourcemap: true
-  },
-
+  }
+}, {
+  ...rollupOptions,
+  input: 'src/registerToolbar.js',
+  output: {
+    file: 'registerToolbar.js',
+    format: 'cjs',
+    sourcemap: true
+  }
 }]
