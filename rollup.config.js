@@ -20,8 +20,7 @@ const rollupOptions = {
       exclude: 'node_modules/**' // only transpile our source code
     }),
     uglify({
-      sourcemap: true,
-      numWorkers: 2
+      sourcemap: true
     })
   ],
   external: [
