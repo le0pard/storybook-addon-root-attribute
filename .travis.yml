@@ -6,7 +6,7 @@ cache:
 os: linux
 dist: bionic
 
-matrix:
+jobs:
   fast_finish: true
   include:
     - node_js: node
@@ -25,7 +25,7 @@ deploy:
   edge: true
   email: leopard.not.a@gmail.com
   cleanup: false
-  api_key:
+  api_token:
     secure: MAorG+ARXV6ewCsWs5t3845F0xM294NHLdD6zhXne2ZLxQH1szwPcIVJaiXSqVlS9I8y+b/KcEh2V7sMnL0mzxxnNQ79uJkR0Atp2mBJk7iWKqsHRjyPZhLL2BcspLvx3IS/VOLUYcqKhS2xm2dZrtA2PYjGsi/na6V949zCzXqZq+bog7OfqkJjy0L4oc3Xan+zEDWAzm0MSpmuHCNK4JGjNdPWTB/2UwLW55qwQcCfZFnr85W+qcX9Gkhyu83gJFLxPj4ASrMfUVkhj1B1XOd1vWVSDmFwEqCASY677UfeYx+6t85wC5oLAprkcGb/SrL1hWerY52Wu4ghaQ8y7c4iZUFW0zPD2PA8z1aMJ18PqRFDj16mfMcY8tHj/ToyvFJ+UKAIwr3G4BQcnOb0opFRKSTadGqxOasfJxTKQzM7+ucovvRLWUBLS1mbexCx7tCgcsUpnyq/nqahDf0nBSgNh6c/D5eLvSouab64/VowWYMoEayOkqwN6tvAS0XPslzZScYKHM0+pccCpffLtOyWXFrRL6SSn8KehWYns5cbwkGRHiOFigRld4jEjAv0ev7ah57PlRh9qqbQhTGS/pvEdWaohkpyK5crw5sQOwnUXg78sMhtR+BQvANa5XTOd5EB8GyOXLo2D3WDGY7mxb5HhC9bq+3rr/luh9TFUMc=
   on:
     tags: true
