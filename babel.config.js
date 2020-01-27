@@ -29,7 +29,7 @@ module.exports = function (api) {
           forceAllTransforms: true,
           modules: isTestEnv ? 'commonjs' : false,
           useBuiltIns: 'usage',
-          corejs: 2
+          corejs: 3
         }
       ],
       [
@@ -37,7 +37,7 @@ module.exports = function (api) {
         {
           development: isDevelopmentEnv || isTestEnv,
           useBuiltIns: 'usage',
-          corejs: 2
+          corejs: 3
         }
       ]
     ],
@@ -51,7 +51,7 @@ module.exports = function (api) {
         {
           helpers: false,
           regenerator: true,
-          corejs: 2
+          corejs: 3
         }
       ],
       [
@@ -66,7 +66,7 @@ module.exports = function (api) {
         '@babel/plugin-proposal-object-rest-spread',
         {
           useBuiltIns: 'usage',
-          corejs: 2
+          corejs: 3
         }
       ],
       [
