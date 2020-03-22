@@ -29,7 +29,8 @@ const rollupOptions = {
     '@storybook/components',
     '@storybook/core-events',
     '@storybook/theming'
-  ]
+  ],
+  context: 'window'
 };
 
 export default [{
