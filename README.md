@@ -12,15 +12,13 @@ yarn add -D storybook-addon-root-attribute
 
 ## Configuration
 
-Then create a file called `addons.js` in your storybook config.
-
-Add following content to it:
+Then create a file called `addons.js` in your storybook config and add following content to it:
 
 ```js
 import "storybook-addon-root-attribute/register";
 ```
 
-or in `main.js`:
+or create a file called `main.js` and add addong in `addons` section:
 
 ```js
 module.exports = {
