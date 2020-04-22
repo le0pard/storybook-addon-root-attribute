@@ -20,10 +20,16 @@ Add following content to it:
 import "storybook-addon-root-attribute/register";
 ```
 
-If you want to use a toolbar instead of a panel, you need to add this instead previous import:
+or in `main.js`:
 
 ```js
-import 'storybook-addon-root-attribute/registerToolbar';
+module.exports = {
+  ...
+  addons: [
+    ...
+    'storybook-addon-root-attribute/register'
+  ]
+};
 ```
 
 ## Usage
@@ -82,16 +88,39 @@ storiesOf("Addons|RootAttribute", module).add(
 );
 ```
 
+If you want to use a tooltip (panel will not dissapear), you need to set `tooltip` in parameters with `true` value:
+
+```js
+addParameters({
+  rootAttribute: {
+    tooltip: true,
+    defaultState: {
+      name: "Default",
+      value: null
+    },
+    states: [
+      {
+        name: "Dark",
+        value: "dark"
+      }
+    ]
+  }
+});
+```
+
+Tooltip and panel will not sync about change attribute.
+
 ## Configuration
 
 Configuration params for `rootAttribute` parameter:
 
 | **Name**     | _Default_ | _Variants_                                                                                          | **Description**                                                                                                         |
-| ------------ | --------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+|--------------|-----------|-----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | root         | 'html'    | 'html', 'body', or first element returned by 'document.querySelector(), or if none found -- 'html'' | Root node, which attribute will changed by addon                                                                        |
 | attribute    | 'class'   | any valid attribute name                                                                            | Attribute name                                                                                                          |
 | defaultState | {}        | should contain `name` and `value`                                                                   | Default state for attribute. Value `nil` will remove attribute from root                                                |
 | states       | []        | array with objects, which contain unique `name` and `value` for attribute                           | All needed states for attribute values. Each object should contain unique `name` (for button) and `value` for attribute |
+| tooltip      | false     | boolean value                                                                                       | Add tooltip button for storybook                                                                                        |
 
 Configuration example:
 

@@ -212,7 +212,7 @@ export default class RootAttributePanel extends React.Component {
         closeOnClick={true}
         onDoubleClick={() => this.resetToDefaultState()}
       >
-        <IconButton key="attribute" active={!this.isDefaultSelected()} title="Root Attribute">
+        <IconButton key="root-attribute" active={!this.isDefaultSelected()} title="Root Attribute">
           <Icons icon="structure" />
         </IconButton>
       </WithTooltip>

@@ -30,7 +30,7 @@ const rollupOptions = {
     '@storybook/core-events',
     '@storybook/theming'
   ],
-  context: 'window'
+  context: 'this'
 };
 
 export default [{
@@ -46,14 +46,6 @@ export default [{
   input: 'src/register.js',
   output: {
     file: 'register.js',
-    format: 'cjs',
-    sourcemap: true
-  }
-}, {
-  ...rollupOptions,
-  input: 'src/registerToolbar.js',
-  output: {
-    file: 'registerToolbar.js',
     format: 'cjs',
     sourcemap: true
   }
