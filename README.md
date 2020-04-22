@@ -18,7 +18,7 @@ Then create a file called `addons.js` in your storybook config and add following
 import "storybook-addon-root-attribute/register";
 ```
 
-or create a file called `main.js` and add addong in `addons` section:
+or create a file called `main.js` and add addon in `addons` section:
 
 ```js
 module.exports = {
