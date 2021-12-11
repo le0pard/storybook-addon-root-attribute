@@ -27,7 +27,7 @@ const DEFAULT_VALUES = {
 export default class RootAttributePanel extends React.Component {
   static defaultProps = {
     isToolbar: false
-  }
+  };
 
   constructor(props) {
     super(props);
