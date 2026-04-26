@@ -1,13 +1,13 @@
 {
   "name": "storybook-addon-root-attribute",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Storybook Addon Root Attribute to switch html or body attribute at runtime for your story",
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
     "eslint": "eslint --ext .jsx,.js src/",
     "jest": "jest",
-    "test": "npm run eslint && npm run jest"
+    "test": "yarn run eslint && yarn run jest"
   },
   "repository": {
     "type": "git",
@@ -28,44 +28,41 @@
   },
   "homepage": "https://github.com/le0pard/storybook-addon-root-attribute#readme",
   "devDependencies": {
-    "@babel/core": "7.16.0",
-    "@babel/eslint-parser": "^7.16.3",
-    "@babel/plugin-transform-regenerator": "7.16.0",
-    "@babel/plugin-transform-runtime": "7.16.4",
-    "@babel/preset-env": "7.16.4",
-    "@babel/preset-react": "7.16.0",
-    "@babel/runtime": "7.26.10",
-    "@babel/runtime-corejs3": "7.16.3",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
-    "babel-jest": "27.4.4",
-    "core-js": "3.19.3",
+    "@babel/core": "7.29.0",
+    "@babel/eslint-parser": "^7.28.6",
+    "@babel/plugin-transform-regenerator": "7.29.0",
+    "@babel/plugin-transform-runtime": "7.29.0",
+    "@babel/preset-env": "7.29.2",
+    "@babel/preset-react": "7.28.5",
+    "@babel/runtime": "7.29.2",
+    "@babel/runtime-corejs3": "7.29.2",
+    "@storybook/icons": "^2.0.1",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
+    "babel-jest": "27.5.1",
+    "core-js": "3.49.0",
     "enzyme": "3.11.0",
-    "eslint": "8.4.1",
-    "eslint-plugin-import": "2.25.3",
-    "eslint-plugin-react": "7.27.1",
+    "eslint": "8.57.1",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-react": "7.37.5",
     "global": "4.4.0",
-    "jest": "27.4.4",
+    "jest": "27.5.1",
     "lodash": "4.18.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-test-renderer": "17.0.2",
-    "rollup": "3.30.0",
+    "rollup": "4.60.2",
     "rollup-plugin-babel": "4.4.0",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-eslint": "7.0.0",
     "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "storybook": "^10.3.5"
   },
   "peerDependencies": {
     "react": "*"
   },
-  "dependencies": {
-    "@storybook/addons": ">=6.0.0",
-    "@storybook/components": ">=6.0.0",
-    "@storybook/core-events": ">=6.0.0",
-    "@storybook/theming": ">=6.0.0"
-  },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "packageManager": "yarn@4.14.1"
 }

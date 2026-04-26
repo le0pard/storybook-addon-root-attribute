@@ -23,10 +23,12 @@ const rollupOptions = {
   ],
   external: [
     'react',
-    '@storybook/addons',
-    '@storybook/components',
-    '@storybook/core-events',
-    '@storybook/theming'
+    'storybook/manager-api',
+    'storybook/preview-api',
+    'storybook/internal/components',
+    'storybook/internal/core-events',
+    'storybook/internal/theming',
+    '@storybook/icons'
   ],
   context: 'this'
 };
@@ -36,7 +38,8 @@ export default [{
   input: 'src/index.js',
   output: {
     file: 'index.js',
-    format: 'cjs',
+    format: 'es',
+    exports: 'auto',
     sourcemap: true
   }
 }, {
@@ -44,7 +47,8 @@ export default [{
   input: 'src/register.js',
   output: {
     file: 'register.js',
-    format: 'cjs',
+    format: 'es',
+    exports: 'auto',
     sourcemap: true
   }
 }]

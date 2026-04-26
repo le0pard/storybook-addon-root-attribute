@@ -2,15 +2,15 @@ import React from 'react';
 import _merge from 'lodash/merge';
 import _uniq from 'lodash/uniq';
 import {EVENTS, PARAM_KEY} from './constants';
-import {styled} from '@storybook/theming';
-import {STORY_RENDERED} from '@storybook/core-events';
+import {styled} from 'storybook/internal/theming';
+import {STORY_RENDERED} from 'storybook/internal/core-events';
 import {
   Button,
-  Icons,
   IconButton,
   WithTooltip,
   TooltipLinkList
-} from '@storybook/components';
+} from 'storybook/internal/components';
+import {ComponentIcon} from '@storybook/icons';
 
 const SwitchButton = styled(Button)(() => ({
   padding: '13px 20px',
@@ -213,7 +213,7 @@ export default class RootAttributePanel extends React.Component {
         onDoubleClick={() => this.resetToDefaultState()}
       >
         <IconButton key="root-attribute" active={!this.isDefaultSelected()} title="Root Attribute">
-          <Icons icon="structure" />
+          <ComponentIcon />
         </IconButton>
       </WithTooltip>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import RootAttributePanel from './rootAttributePanel';
-import {addons, types} from '@storybook/addons';
+import {addons, types} from 'storybook/manager-api';
 import {ADDON_ID, PANEL_ID, PARAM_KEY} from './constants';
 
 export const register = () => {

@@ -1,6 +1,6 @@
 import document from 'global/document';
 import {EVENTS, PARAM_KEY} from './register/constants';
-import {addons, makeDecorator} from '@storybook/addons';
+import {addons, makeDecorator} from 'storybook/preview-api';
 
 const updateRootAttribute = ({root = 'html', attribute, currentState}) => {
   const element = (() => {
