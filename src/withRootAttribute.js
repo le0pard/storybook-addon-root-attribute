@@ -1,4 +1,3 @@
-import document from 'global/document';
 import {EVENTS, PARAM_KEY} from './register/constants';
 import {addons, makeDecorator} from 'storybook/preview-api';
 
@@ -20,13 +19,18 @@ const updateRootAttribute = ({root = 'html', attribute, currentState}) => {
   }
 };
 
+let isListening = false;
+
 export const withRootAttribute = makeDecorator({
   name: 'withRootAttribute',
   parameterName: PARAM_KEY,
   skipIfNoParametersOrOptions: true,
   allowDeprecatedUsage: false,
   wrapper: (getStory, context) => {
-    addons.getChannel().on(EVENTS.UPDATE, updateRootAttribute);
+    if (!isListening) {
+      addons.getChannel().on(EVENTS.UPDATE, updateRootAttribute);
+      isListening = true;
+    }
 
     return getStory(context);
   }
