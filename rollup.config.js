@@ -17,6 +17,8 @@ const rollupOptions = {
   ],
   external: [
     'react',
+    'react/jsx-runtime',
+    'react/jsx-dev-runtime',
     'storybook/manager-api',
     'storybook/preview-api',
     'storybook/internal/components',
