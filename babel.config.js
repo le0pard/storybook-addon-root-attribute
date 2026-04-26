@@ -36,6 +36,7 @@ export default (api) => {
         '@babel/preset-react',
         {
           development: isDevelopmentEnv || isTestEnv,
+          runtime: 'automatic',
           useBuiltIns: 'usage',
           corejs: 3
         }

@@ -1,154 +1,119 @@
 import React from 'react';
-import {configure, shallow} from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import {render, screen, act} from '@testing-library/react';
+import '@testing-library/jest-dom'; // Gives us matchers like .toBeInTheDocument()
 
-// 1. Mock Storybook's new internal theming engine (Using ES5 to prevent Babel AST crash)
+// Mock Storybook's new internal theming engine
+// We make styled(Component) simply return the base Component directly
 jest.mock('storybook/internal/theming', function() {
   return {
-    styled: function() {
+    styled: function(Component) {
       return function() {
-        function MockStyled() {
-          return null;
-        }
-        MockStyled.displayName = 'Styled(Component)';
-        return MockStyled;
+        return Component;
       };
     }
   };
 }, {virtual: true});
 
-// 2. Mock Storybook's internal events
+// Mock Storybook's internal events
 jest.mock('storybook/internal/core-events', function() {
   return {STORY_RENDERED: 'storyRendered'};
 }, {virtual: true});
 
-// 3. Mock Storybook's internal UI components
+// Mock Storybook's internal UI components to render actual HTML elements
 jest.mock('storybook/internal/components', function() {
+  // Prefixing the variable with "mock" bypasses Jest's scope linter completely!
+  const mockReact = require('react');
+
+  const filterProps = (props) => {
+    const validDOMProps = {...props};
+
+    delete validDOMProps.outline;
+    delete validDOMProps.secondary;
+    delete validDOMProps.active;
+    return validDOMProps;
+  };
+
   return {
-    Button: function() { return null; },
-    IconButton: function() { return null; },
-    WithTooltip: function() { return null; },
+    Button: function(props) { return mockReact.createElement('button', filterProps(props), props.children); },
+    IconButton: function(props) { return mockReact.createElement('button', filterProps(props), props.children); },
+    WithTooltip: function(props) { return mockReact.createElement('div', {'data-testid': 'with-tooltip'}, props.children); },
     TooltipLinkList: function() { return null; }
   };
 }, {virtual: true});
 
-// 4. Mock the new standalone icons
+// Mock the new standalone icons
 jest.mock('@storybook/icons', function() {
-  return {ComponentIcon: function() { return null; }};
+  const mockReact = require('react');
+
+  return {
+    ComponentIcon: function() { return mockReact.createElement('svg', {'data-testid': 'component-icon'}); }
+  };
 }, {virtual: true});
 
-// NOW import the component
 import RootAttributePanel from '../rootAttributePanel';
 
-configure({adapter: new Adapter()});
+describe('RootAttributePanel', () => {
+  let mockApi;
+  let storyRenderedCallback;
 
-test('RootAttributePanel non active render nothing', () => {
-  const api = {
-    on: () => { },
-    off: () => { }
-  };
+  beforeEach(() => {
+    storyRenderedCallback = null;
 
-  const panel = shallow(<RootAttributePanel api={api} active={false} />);
-
-  expect(panel.text()).toEqual('');
-});
-
-test('RootAttributePanel render nothing by default', () => {
-  const api = {
-    on: () => {},
-    off: () => {}
-  };
-
-  const panel = shallow(<RootAttributePanel api={api} active={true} />);
-
-  expect(panel.text()).toEqual('');
-});
-
-test('RootAttributePanel render list', () => {
-  let callback = null;
-  const api = {
-    on: (event, cb) => {
-      callback = cb;
-    },
-    off: () => {
-      callback = null;
-    },
-    getParameters: () => {
-      return {
-        defaultState: {
-          name: 'Default',
-          value: null
-        },
-        states: [
-          {
-            name: 'Dark',
-            value: 'dark'
-          }
-        ]
-      };
-    },
-    emit: () => {}
-  };
-
-  const panel = shallow(<RootAttributePanel api={api} active={true} />);
-  callback();
-
-  expect(panel.text()).toEqual('<Styled(Component) /><Styled(Component) />');
-  expect(panel.state().currentOptions).toEqual({
-    root: 'html',
-    attribute: 'class',
-    defaultState: {
-      name: 'Default',
-      value: null
-    },
-    states: [
-      {
-        name: 'Dark',
-        value: 'dark'
-      }
-    ]
+    // Create a fresh mock API for every test
+    mockApi = {
+      on: jest.fn((event, cb) => {
+        storyRenderedCallback = cb;
+      }),
+      off: jest.fn(),
+      getParameters: jest.fn(),
+      emit: jest.fn()
+    };
   });
-  expect(panel.state().collectedStates).toEqual([
-    {
-      name: 'Default',
-      value: null,
-      selected: true
-    },
-    {
-      name: 'Dark',
-      value: 'dark'
-    }
-  ]);
-});
 
-test('RootAttributePanel render toolbar', () => {
-  let callback = null;
-  const api = {
-    on: (event, cb) => {
-      callback = cb;
-    },
-    off: () => {
-      callback = null;
-    },
-    getParameters: () => {
-      return {
-        defaultState: {
-          name: 'Default',
-          value: null
-        },
-        states: [
-          {
-            name: 'Dark',
-            value: 'dark'
-          }
-        ]
-      };
-    },
-    emit: () => {}
-  };
+  test('renders nothing when not active', () => {
+    const {container} = render(<RootAttributePanel api={mockApi} active={false} />);
+    expect(container).toBeEmptyDOMElement();
+  });
 
-  const panel = shallow(<RootAttributePanel isToolbar={true} api={api} />);
-  callback();
+  test('renders nothing by default when active but no state', () => {
+    const {container} = render(<RootAttributePanel api={mockApi} active={true} />);
+    expect(container.firstChild).toBeEmptyDOMElement();
+  });
 
-  expect(panel.text()).toEqual('<WithTooltip />');
+  test('renders list of state buttons when story changes', () => {
+    mockApi.getParameters.mockReturnValue({
+      defaultState: {name: 'Default', value: null},
+      states: [
+        {name: 'Dark', value: 'dark'}
+      ]
+    });
+
+    render(<RootAttributePanel api={mockApi} active={true} />);
+
+    // Simulate Storybook triggering the STORY_RENDERED event
+    act(() => {
+      storyRenderedCallback('story-id-1');
+    });
+
+    // Check that our mocked <button> elements rendered with the correct text
+    expect(screen.getByText('Default')).toBeInTheDocument();
+    expect(screen.getByText('Dark')).toBeInTheDocument();
+  });
+
+  test('renders toolbar component with tooltip when isToolbar is true', () => {
+    mockApi.getParameters.mockReturnValue({
+      defaultState: {name: 'Default', value: null},
+      states: [{name: 'Dark', value: 'dark'}]
+    });
+
+    render(<RootAttributePanel isToolbar={true} api={mockApi} />);
+
+    act(() => {
+      storyRenderedCallback('story-id-1');
+    });
+
+    // Check that our mocked WithTooltip div is present
+    expect(screen.getByTestId('with-tooltip')).toBeInTheDocument();
+    expect(screen.getByTestId('component-icon')).toBeInTheDocument();
+  });
 });
