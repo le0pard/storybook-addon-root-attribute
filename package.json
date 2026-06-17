@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/le0pard/storybook-addon-root-attribute#readme",
   "devDependencies": {
-    "@babel/core": "7.29.0",
+    "@babel/core": "7.29.6",
     "@babel/eslint-parser": "^7.28.6",
     "@babel/plugin-transform-regenerator": "7.29.0",
     "@babel/plugin-transform-runtime": "7.29.0",
