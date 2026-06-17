@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/le0pard/storybook-addon-root-attribute.git"
+    "url": "git+https://github.com/le0pard/storybook-addon-root-attribute.git"
   },
   "keywords": [
     "storybook",
